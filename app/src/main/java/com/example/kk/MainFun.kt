@@ -1,15 +1,10 @@
 package com.example.kk
 
 import android.os.Handler
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
-
-public var boss: Int = 0
-public var totalHp: Int = 0
-public var damage: Int = 1
-public var passiveDamage: Int = 0
-public var wallet: Int = 0
 
 public fun whoNext(list: List<Int>): Int {
     return list.random()
@@ -20,7 +15,6 @@ public fun passiveDamage(
     hpBoss: Int,
     revardMob: Int,
     revardBoss: Int,
-    passiveDamage: Int,
     texturePack: List<Int>,
     enemy: ImageButton,
     Hp: ProgressBar,
@@ -30,7 +24,7 @@ public fun passiveDamage(
     val handler = Handler()
     handler.postDelayed(object : Runnable {
         override fun run() {
-            onClick(hpMob, hpBoss, revardMob, revardBoss, passiveDamage, texturePack, enemy, Hp, money, stringHp)
+            onClick(hpMob, hpBoss, revardMob, revardBoss, getPassiveDamage(), texturePack, enemy, Hp, money, stringHp)
             handler.postDelayed(this, 1000)
         }
     }, 0)
@@ -53,14 +47,14 @@ public fun onClick(
         if (totalHp <= 0) boss = 0
     } else {
         fight(damage, hpMob, revardMob, Hp, enemy, whoNext(texturePack))
-        if (totalHp <= 0) boss++
+        if(totalHp <= 0) boss++
     }
-    if (totalHp <= 0) money.text = "$wallet"
+    if(totalHp<= 0)money.text = "$wallet"
     Hp.progress = totalHp
     stringHp.text = "$totalHp"
 }
 
-public fun fight(
+private fun fight(
     damage: Int,
     hpMob: Int,
     revardMob: Int,
@@ -71,9 +65,22 @@ public fun fight(
     if (totalHp > 0) {
         totalHp -= damage
     } else {
+        wallet += revardMob
         totalHp = hpMob
         Hp.max = hpMob
-        wallet += revardMob
         enemy.setImageResource(textures)
     }
+}
+
+public fun getPassiveDamage(): Int{
+    return passiveDamage
+}
+
+public fun equip(S1: Boolean, S2: Boolean, S3: Boolean, BS1: Button, BS2: Button, BS3: Button) {
+    equipS1 = S1
+    equipS2 = S2
+    equipS3 = S3
+    BS1.isEnabled = !S1
+    BS2.isEnabled = !S2
+    BS3.isEnabled = !S3
 }

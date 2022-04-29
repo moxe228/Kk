@@ -3,19 +3,21 @@ package com.example.kk
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import kotlin.collections.listOf as listOf
 
-
+public var boss: Int = 0
+public var totalHp: Int = 0
+public var damage: Int = 1
+public var passiveDamage: Int = 0
+public var wallet: Int = 100
 
 public class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val enemyOne = listOf(R.drawable.s, R.drawable.smile, R.drawable.qq)
 
         val weapon: Button = findViewById(R.id.weapon)
@@ -27,7 +29,9 @@ public class MainActivity : AppCompatActivity() {
         val stringHp: TextView = findViewById(R.id.stringHp)
 
 
-        passiveDamage(10, 20, 1, 10, passiveDamage, enemyOne, enemy, Hp, money, stringHp)
+        money.text = "$wallet"
+
+        passiveDamage(10, 20, 1, 10, enemyOne, enemy, Hp, money, stringHp)
 
         enemy.setOnClickListener {
             stringHp.text = "$totalHp"
@@ -47,3 +51,8 @@ public class MainActivity : AppCompatActivity() {
     }
 
 }
+
+
+
+
+
