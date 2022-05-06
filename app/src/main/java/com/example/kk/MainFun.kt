@@ -70,15 +70,14 @@ public fun onClick(
     money: TextView,
     stringHp: TextView
 ) {
-    lastTexture = if(boss == 5) whoNext(true) else whoNext(false)
     if (boss == 5) {
-        fight(damage, hpBoss, revardBoss, Hp, enemy, lastTexture)
+        fight(damage, hpBoss, revardBoss, Hp, enemy, whoNext(true))
         if (totalHp <= 0) {
             boss = 0
             lvl++
         }
     } else {
-        fight(damage, hpMob, revardMob, Hp, enemy, lastTexture)
+        fight(damage, hpMob, revardMob, Hp, enemy, whoNext(false))
         if (totalHp <= 0) boss++
     }
     if (totalHp <= 0) money.text = "$wallet"
@@ -100,6 +99,7 @@ private fun fight(
         wallet += revardMob
         totalHp = hpMob
         Hp.max = hpMob
+        lastTexture = textures
         enemy.setImageResource(textures)
     }
 }

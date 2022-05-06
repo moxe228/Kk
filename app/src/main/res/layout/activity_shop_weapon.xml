@@ -9,21 +9,21 @@
 
 
     <ImageView
-            android:src="@drawable/sword"
+            android:src="@drawable/sword3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/imageView"
 
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="17dp"
             android:layout_marginBottom="56dp" app:layout_constraintBottom_toTopOf="@+id/imageView3"/>
     <ImageView
-            android:src="@drawable/sword"
+            android:src="@drawable/sword2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/imageView3"
 
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="19dp"
             android:layout_marginBottom="58dp" app:layout_constraintBottom_toTopOf="@+id/imageView4"/>
     <ImageView
-            android:src="@drawable/sword"
+            android:src="@drawable/sword1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/imageView4"
 

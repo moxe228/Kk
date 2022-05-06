@@ -35,7 +35,6 @@ public class MainActivity : AppCompatActivity() {
 
         val money: TextView = findViewById(R.id.money)
         val enemy: ImageButton = findViewById(R.id.enemy)
-
         val Hp: ProgressBar = findViewById(R.id.progressBarHp)
         val stringHp: TextView = findViewById(R.id.stringHp)
 
