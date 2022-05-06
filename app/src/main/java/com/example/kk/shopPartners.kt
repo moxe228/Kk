@@ -1,6 +1,8 @@
 package com.example.kk
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -11,9 +13,16 @@ private var p2 = false
 private var p3 = false
 
 class shopPartners : AppCompatActivity() {
+    var pref: SharedPreferences? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_partners)
+
+        pref = getSharedPreferences("TABLESP", Context.MODE_PRIVATE)
+        p1 = pref?.getBoolean("p1", false)!!
+        p2 = pref?.getBoolean("p2", false)!!
+        p3 = pref?.getBoolean("p3", false)!!
 
         val buttonP1: Button = findViewById(R.id.buttonP1)
         val buttonP2: Button = findViewById(R.id.buttonP2)
@@ -49,5 +58,24 @@ class shopPartners : AppCompatActivity() {
                 buttonP3.isEnabled = false
             }
         }
+    }
+
+    private fun saveData(p1: Boolean, p2: Boolean, p3: Boolean){
+        val editor = pref?.edit()
+        editor?.putBoolean("p1", p1)
+        editor?.putBoolean("p2", p2)
+        editor?.putBoolean("p3", p3)
+        editor?.apply()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        saveData(p1, p2, p3)
+    }
+
+    fun delAll(){
+        val editor = pref?.edit()
+        editor?.clear()
+        editor?.apply()
     }
 }

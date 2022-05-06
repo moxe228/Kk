@@ -6,16 +6,48 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 
-public fun whoNext(list: List<Int>): Int {
-    return list.random()
+private var hpMob = 0
+private var revardMob = 0
+private var hpBoss = 0
+private var revardBoss = 0
+public var lastTexture = 0
+
+public fun whoNext(boss: Boolean): Int{
+    val enemyOne = listOf(R.drawable.s, R.drawable.smile, R.drawable.qq)
+    val enemtTwo = listOf(R.drawable.unnamed)
+    if (!boss) {
+        when{
+            lvl in 0..1 -> return enemyOne.random()
+            lvl in 2..3 -> return enemtTwo.random()
+        }
+    } else {
+        when{
+            lvl in 0..1 -> return R.drawable.boss
+            lvl in 2..3 -> return R.drawable.boss
+        }
+    }
+    return 0
+}
+
+
+public fun hpAndRevard(){
+    when{
+        lvl in 0..1 -> {
+            hpMob = 10
+            hpBoss = 20
+            revardMob = 1
+            revardBoss = 10
+        }
+        lvl in 2..3 -> {
+            hpMob = 15
+            hpBoss = 30
+            revardMob = 2
+            revardBoss = 20
+        }
+    }
 }
 
 public fun passiveDamage(
-    hpMob: Int,
-    hpBoss: Int,
-    revardMob: Int,
-    revardBoss: Int,
-    texturePack: List<Int>,
     enemy: ImageButton,
     Hp: ProgressBar,
     money: TextView,
@@ -24,32 +56,32 @@ public fun passiveDamage(
     val handler = Handler()
     handler.postDelayed(object : Runnable {
         override fun run() {
-            onClick(hpMob, hpBoss, revardMob, revardBoss, getPassiveDamage(), texturePack, enemy, Hp, money, stringHp)
+            hpAndRevard()
+            onClick(getPassiveDamage(), enemy, Hp, money, stringHp)
             handler.postDelayed(this, 1000)
         }
     }, 0)
 }
 
 public fun onClick(
-    hpMob: Int,
-    hpBoss: Int,
-    revardMob: Int,
-    revardBoss: Int,
     damage: Int,
-    texturePack: List<Int>,
     enemy: ImageButton,
     Hp: ProgressBar,
     money: TextView,
     stringHp: TextView
 ) {
+    lastTexture = if(boss == 5) whoNext(true) else whoNext(false)
     if (boss == 5) {
-        fight(damage, hpBoss, revardBoss, Hp, enemy, R.drawable.boss)
-        if (totalHp <= 0) boss = 0
+        fight(damage, hpBoss, revardBoss, Hp, enemy, lastTexture)
+        if (totalHp <= 0) {
+            boss = 0
+            lvl++
+        }
     } else {
-        fight(damage, hpMob, revardMob, Hp, enemy, whoNext(texturePack))
-        if(totalHp <= 0) boss++
+        fight(damage, hpMob, revardMob, Hp, enemy, lastTexture)
+        if (totalHp <= 0) boss++
     }
-    if(totalHp<= 0)money.text = "$wallet"
+    if (totalHp <= 0) money.text = "$wallet"
     Hp.progress = totalHp
     stringHp.text = "$totalHp"
 }
@@ -72,7 +104,8 @@ private fun fight(
     }
 }
 
-public fun getPassiveDamage(): Int{
+
+private fun getPassiveDamage(): Int {
     return passiveDamage
 }
 

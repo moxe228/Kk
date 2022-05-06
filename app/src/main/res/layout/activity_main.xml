@@ -8,6 +8,7 @@
         tools:context=".MainActivity">
 
 
+
     <TextView
             android:id="@+id/money"
             android:layout_width="wrap_content"
@@ -21,6 +22,7 @@
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="540dp"/>
     <ImageButton
             android:id="@+id/enemy"
+            android:background="@null"
             android:layout_width="184sp"
             android:layout_height="264sp"
             android:src="@drawable/smile"
