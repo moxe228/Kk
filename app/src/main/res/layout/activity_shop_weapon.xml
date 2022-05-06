@@ -9,21 +9,21 @@
 
 
     <ImageView
-            android:src="@drawable/sword"
+            android:src="@drawable/sword3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/imageView"
 
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="17dp"
             android:layout_marginBottom="56dp" app:layout_constraintBottom_toTopOf="@+id/imageView3"/>
     <ImageView
-            android:src="@drawable/sword"
+            android:src="@drawable/sword2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/imageView3"
 
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="19dp"
             android:layout_marginBottom="58dp" app:layout_constraintBottom_toTopOf="@+id/imageView4"/>
     <ImageView
-            android:src="@drawable/sword"
+            android:src="@drawable/sword1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/imageView4"
 
@@ -34,15 +34,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/buttonS1"
 
-            android:layout_marginStart="51dp" app:layout_constraintStart_toEndOf="@+id/imageView"
-            android:layout_marginBottom="122dp" app:layout_constraintBottom_toTopOf="@+id/buttonS2"/>
+            android:layout_marginStart="52dp" app:layout_constraintStart_toEndOf="@+id/imageView"
+            android:layout_marginBottom="124dp" app:layout_constraintBottom_toTopOf="@+id/buttonS2"/>
     <Button
             android:text="Buy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/buttonS2"
 
             android:layout_marginStart="52dp" app:layout_constraintStart_toEndOf="@+id/imageView3"
-            android:layout_marginBottom="131dp" app:layout_constraintBottom_toTopOf="@+id/buttonS3"/>
+            android:layout_marginBottom="136dp" app:layout_constraintBottom_toTopOf="@+id/buttonS3"/>
     <Button
             android:text="Buy"
             android:layout_width="wrap_content"

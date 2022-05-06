@@ -13,17 +13,20 @@ private var revardBoss = 0
 public var lastTexture = 0
 
 public fun whoNext(boss: Boolean): Int{
-    val enemyOne = listOf(R.drawable.s, R.drawable.smile, R.drawable.qq)
-    val enemtTwo = listOf(R.drawable.unnamed)
+    val enemyOne = listOf(R.drawable.e11, R.drawable.e12, R.drawable.e13)
+    val enemtTwo = listOf(R.drawable.s, R.drawable.smile, R.drawable.qq)
+    val enemyThree = listOf(R.drawable.e31, R.drawable.e32, R.drawable.e33)
     if (!boss) {
         when{
             lvl in 0..1 -> return enemyOne.random()
             lvl in 2..3 -> return enemtTwo.random()
+            lvl in 4..5 -> return enemyThree.random()
         }
     } else {
         when{
-            lvl in 0..1 -> return R.drawable.boss
+            lvl in 0..1 -> return R.drawable.b11
             lvl in 2..3 -> return R.drawable.boss
+            lvl in 4..5 -> return R.drawable.unnamed
         }
     }
     return 0
@@ -43,6 +46,12 @@ public fun hpAndRevard(){
             hpBoss = 30
             revardMob = 2
             revardBoss = 20
+        }
+        lvl in 4..5 -> {
+            hpMob = 20
+            hpBoss = 40
+            revardMob = 3
+            revardBoss = 30
         }
     }
 }
@@ -70,15 +79,14 @@ public fun onClick(
     money: TextView,
     stringHp: TextView
 ) {
-    lastTexture = if(boss == 5) whoNext(true) else whoNext(false)
     if (boss == 5) {
-        fight(damage, hpBoss, revardBoss, Hp, enemy, lastTexture)
+        fight(damage, hpBoss, revardBoss, Hp, enemy, whoNext(true))
         if (totalHp <= 0) {
             boss = 0
             lvl++
         }
     } else {
-        fight(damage, hpMob, revardMob, Hp, enemy, lastTexture)
+        fight(damage, hpMob, revardMob, Hp, enemy, whoNext(false))
         if (totalHp <= 0) boss++
     }
     if (totalHp <= 0) money.text = "$wallet"
@@ -100,6 +108,7 @@ private fun fight(
         wallet += revardMob
         totalHp = hpMob
         Hp.max = hpMob
+        lastTexture = textures
         enemy.setImageResource(textures)
     }
 }

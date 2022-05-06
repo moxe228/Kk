@@ -20,6 +20,7 @@ class shopPartners : AppCompatActivity() {
         setContentView(R.layout.activity_shop_partners)
 
         pref = getSharedPreferences("TABLESP", Context.MODE_PRIVATE)
+        delAll()
         p1 = pref?.getBoolean("p1", false)!!
         p2 = pref?.getBoolean("p2", false)!!
         p3 = pref?.getBoolean("p3", false)!!

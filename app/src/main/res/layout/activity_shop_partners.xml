@@ -7,24 +7,24 @@
         android:layout_height="match_parent"
         tools:context=".shopPartners">
     <ImageView
-            android:layout_width="138dp"
-            android:layout_height="136dp" android:src="@drawable/boss" android:id="@+id/imageView2"
+            android:layout_width="160dp"
+            android:layout_height="120dp" android:src="@drawable/partner1" android:id="@+id/imageView2"
 
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="44dp"
-            android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/imageView5"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="36dp"
+            android:layout_marginBottom="28dp" app:layout_constraintBottom_toTopOf="@+id/imageView5"
     />
     <ImageView
-            android:layout_width="165dp"
-            android:layout_height="114dp" android:src="@drawable/s" android:id="@+id/imageView5"
+            android:layout_width="160dp"
+            android:layout_height="120dp" android:src="@drawable/partner2" android:id="@+id/imageView5"
 
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
-            android:layout_marginBottom="28dp" app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="36dp"
+            android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/imageView6"
     />
     <ImageView
-            android:layout_width="159dp"
-            android:layout_height="143dp" android:src="@drawable/smile" android:id="@+id/imageView6"
+            android:layout_width="160dp"
+            android:layout_height="120dp" android:src="@drawable/partner3" android:id="@+id/imageView6"
 
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="36dp"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="44dp"
     />
     <Button
@@ -33,16 +33,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="64dp" app:layout_constraintStart_toEndOf="@+id/imageView2"
-            android:layout_marginBottom="108dp" app:layout_constraintBottom_toTopOf="@+id/buttonP2"/>
+            android:layout_marginStart="72dp" app:layout_constraintStart_toEndOf="@+id/imageView2"
+            android:layout_marginBottom="92dp" app:layout_constraintBottom_toTopOf="@+id/buttonP2"/>
     <Button
             android:id="@+id/buttonP2"
             android:text="Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="52dp" app:layout_constraintStart_toEndOf="@+id/imageView5"
-            android:layout_marginBottom="76dp" app:layout_constraintBottom_toTopOf="@+id/buttonP3"/>
+            android:layout_marginStart="72dp" app:layout_constraintStart_toEndOf="@+id/imageView5"
+            android:layout_marginBottom="92dp" app:layout_constraintBottom_toTopOf="@+id/buttonP3"/>
     <Button
             android:id="@+id/buttonP3"
             android:text="Button"
@@ -50,6 +50,6 @@
             android:layout_height="wrap_content"
 
 
-            android:layout_marginStart="68dp" app:layout_constraintStart_toEndOf="@+id/imageView6"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="92dp"/>
+            android:layout_marginStart="72dp" app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="84dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
