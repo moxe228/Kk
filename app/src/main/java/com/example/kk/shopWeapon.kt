@@ -23,6 +23,7 @@ class shopWeapon : AppCompatActivity() {
         setContentView(R.layout.activity_shop_weapon)
 
         pref = getSharedPreferences("TABLESW", Context.MODE_PRIVATE)
+        if(endGame) delAll()
         haveS1 = pref?.getBoolean("hS1", false)!!
         haveS2 = pref?.getBoolean("hS2", false)!!
         haveS3 = pref?.getBoolean("hS3", false)!!

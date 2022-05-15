@@ -5,12 +5,15 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
+import kotlin.math.max
 
 private var hpMob = 0
 private var revardMob = 0
 private var hpBoss = 0
 private var revardBoss = 0
 public var lastTexture = 0
+public var maxHp = 1
+public var endGame = false
 
 public fun whoNext(boss: Boolean): Int{
     val enemyOne = listOf(R.drawable.e11, R.drawable.e12, R.drawable.e13)
@@ -21,12 +24,14 @@ public fun whoNext(boss: Boolean): Int{
             lvl in 0..1 -> return enemyOne.random()
             lvl in 2..3 -> return enemtTwo.random()
             lvl in 4..5 -> return enemyThree.random()
+            lvl > 5 -> endGame = true
         }
     } else {
         when{
             lvl in 0..1 -> return R.drawable.b11
             lvl in 2..3 -> return R.drawable.boss
             lvl in 4..5 -> return R.drawable.unnamed
+            lvl > 5 -> endGame = true
         }
     }
     return 0
@@ -53,6 +58,7 @@ public fun hpAndRevard(){
             revardMob = 3
             revardBoss = 30
         }
+        lvl > 5 -> endGame = true
     }
 }
 
@@ -82,12 +88,16 @@ public fun onClick(
     if (boss == 5) {
         fight(damage, hpBoss, revardBoss, Hp, enemy, whoNext(true))
         if (totalHp <= 0) {
+            wallet += revardBoss
             boss = 0
             lvl++
         }
     } else {
         fight(damage, hpMob, revardMob, Hp, enemy, whoNext(false))
-        if (totalHp <= 0) boss++
+        if (totalHp <= 0) {
+            wallet += revardMob
+            boss++
+        }
     }
     if (totalHp <= 0) money.text = "$wallet"
     Hp.progress = totalHp
@@ -105,7 +115,7 @@ private fun fight(
     if (totalHp > 0) {
         totalHp -= damage
     } else {
-        wallet += revardMob
+        maxHp = hpMob
         totalHp = hpMob
         Hp.max = hpMob
         lastTexture = textures

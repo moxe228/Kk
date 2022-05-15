@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.widget.*
 
 public var boss: Int = 0
-public var totalHp: Int = 0
+public var totalHp: Int = 1
 public var damage: Int = 1
 public var passiveDamage: Int = 0
 public var wallet: Int = 0
@@ -22,6 +22,9 @@ public class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         preff = getSharedPreferences("TABLEMA", Context.MODE_PRIVATE)
+        if (endGame){
+            delAll()
+        }
         boss = preff?.getInt("boss", 0)!!
         totalHp = preff?.getInt("totalHp", 0)!!
         damage = preff?.getInt("damage", 1)!!
@@ -29,6 +32,7 @@ public class MainActivity : AppCompatActivity() {
         wallet = preff?.getInt("wallet", 0)!!
         lvl = preff?.getInt("lvl", 0)!!
         lastTexture = preff?.getInt("lt", lastTexture)!!
+        maxHp = preff?.getInt("maxHp", maxHp)!!
 
         val weapon: Button = findViewById(R.id.weapon)
         val partners: Button = findViewById(R.id.partners)
@@ -38,11 +42,19 @@ public class MainActivity : AppCompatActivity() {
         val Hp: ProgressBar = findViewById(R.id.progressBarHp)
         val stringHp: TextView = findViewById(R.id.stringHp)
 
+
         hpAndRevard()
+        money.text = "$wallet"
+        Hp.max = maxHp
         enemy.setImageResource(lastTexture)
         passiveDamage(enemy, Hp, money, stringHp)
 
         enemy.setOnClickListener {
+            if (lvl > 5) {
+                endGame = true
+                this.finishAffinity()
+            }
+            endGame = false
             hpAndRevard()
             stringHp.text = "$totalHp"
             Hp.progress = totalHp
@@ -69,6 +81,7 @@ public class MainActivity : AppCompatActivity() {
         editor?.putInt("wallet", wallet)
         editor?.putInt("lvl", lvl)
         editor?.putInt("lt", lastTexture)
+        editor?.putInt("maxHp", maxHp)
         editor?.apply()
     }
 
