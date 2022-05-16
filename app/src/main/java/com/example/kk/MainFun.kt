@@ -5,12 +5,11 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
-import kotlin.math.max
 
 private var hpMob = 0
-private var revardMob = 0
+private var rewardMob = 0
 private var hpBoss = 0
-private var revardBoss = 0
+private var rewardBoss = 0
 public var lastTexture = 0
 public var maxHp = 1
 public var endGame = false
@@ -38,25 +37,25 @@ public fun whoNext(boss: Boolean): Int{
 }
 
 
-public fun hpAndRevard(){
+public fun hpAndReward(){
     when{
         lvl in 0..1 -> {
             hpMob = 10
             hpBoss = 20
-            revardMob = 1
-            revardBoss = 10
+            rewardMob = 1
+            rewardBoss = 10
         }
         lvl in 2..3 -> {
             hpMob = 15
             hpBoss = 30
-            revardMob = 2
-            revardBoss = 20
+            rewardMob = 2
+            rewardBoss = 20
         }
         lvl in 4..5 -> {
             hpMob = 20
             hpBoss = 40
-            revardMob = 3
-            revardBoss = 30
+            rewardMob = 3
+            rewardBoss = 30
         }
         lvl > 5 -> endGame = true
     }
@@ -71,7 +70,7 @@ public fun passiveDamage(
     val handler = Handler()
     handler.postDelayed(object : Runnable {
         override fun run() {
-            hpAndRevard()
+            hpAndReward()
             onClick(getPassiveDamage(), enemy, Hp, money, stringHp)
             handler.postDelayed(this, 1000)
         }
@@ -86,16 +85,16 @@ public fun onClick(
     stringHp: TextView
 ) {
     if (boss == 5) {
-        fight(damage, hpBoss, revardBoss, Hp, enemy, whoNext(true))
+        fight(damage, hpBoss, rewardBoss, Hp, enemy, whoNext(true))
         if (totalHp <= 0) {
-            wallet += revardBoss
+            wallet += rewardBoss
             boss = 0
             lvl++
         }
     } else {
-        fight(damage, hpMob, revardMob, Hp, enemy, whoNext(false))
+        fight(damage, hpMob, rewardMob, Hp, enemy, whoNext(false))
         if (totalHp <= 0) {
-            wallet += revardMob
+            wallet += rewardMob
             boss++
         }
     }

@@ -43,7 +43,7 @@ public class MainActivity : AppCompatActivity() {
         val stringHp: TextView = findViewById(R.id.stringHp)
 
 
-        hpAndRevard()
+        hpAndReward()
         money.text = "$wallet"
         Hp.max = maxHp
         enemy.setImageResource(lastTexture)
@@ -55,7 +55,7 @@ public class MainActivity : AppCompatActivity() {
                 this.finishAffinity()
             }
             endGame = false
-            hpAndRevard()
+            hpAndReward()
             stringHp.text = "$totalHp"
             Hp.progress = totalHp
             onClick(damage, enemy, Hp, money, stringHp)
