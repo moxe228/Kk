@@ -20,8 +20,7 @@ class shopWeapon : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_weapon)
-        pref2 = getSharedPreferences("TABLESW", Context.MODE_PRIVATE)
-        if(GlobalData.endGame) delAll()
+        pref2 = getSharedPreferences("TABLE", Context.MODE_PRIVATE)
         haveS1 = pref2?.getBoolean("hS1", false)!!
         haveS2 = pref2?.getBoolean("hS2", false)!!
         haveS3 = pref2?.getBoolean("hS3", false)!!
@@ -100,11 +99,5 @@ class shopWeapon : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         saveDate(haveS1, haveS2, haveS3, equipS1, equipS2, equipS3)
-    }
-
-    fun delAll(){
-        val editor = pref2?.edit()
-        editor?.clear()
-        editor?.apply()
     }
 }

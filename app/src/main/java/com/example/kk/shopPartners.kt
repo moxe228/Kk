@@ -18,8 +18,7 @@ class shopPartners : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_partners)
-        pref3 = getSharedPreferences("TABLESP", Context.MODE_PRIVATE)
-        if (GlobalData.endGame) delAll()
+        pref3 = getSharedPreferences("TABLE", Context.MODE_PRIVATE)
         p1 = pref3?.getBoolean("p1", false)!!
         p2 = pref3?.getBoolean("p2", false)!!
         p3 = pref3?.getBoolean("p3", false)!!
@@ -71,11 +70,5 @@ class shopPartners : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         saveData(p1, p2, p3)
-    }
-
-    fun delAll(){
-        val editor = pref3?.edit()
-        editor?.clear()
-        editor?.apply()
     }
 }

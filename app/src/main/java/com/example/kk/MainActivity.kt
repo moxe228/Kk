@@ -28,7 +28,7 @@ public class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        pref1 = getSharedPreferences("TABLEMA", Context.MODE_PRIVATE)
+        pref1 = getSharedPreferences("TABLE", Context.MODE_PRIVATE)
         if (GlobalData.endGame) {
             delAll()
         }
