@@ -10,9 +10,7 @@ private var hpMob = 0
 private var rewardMob = 0
 private var hpBoss = 0
 private var rewardBoss = 0
-public var lastTexture = 0
-public var maxHp = 1
-public var endGame = false
+
 
 public fun whoNext(boss: Boolean): Int{
     val enemyOne = listOf(R.drawable.e11, R.drawable.e12, R.drawable.e13)
@@ -20,44 +18,43 @@ public fun whoNext(boss: Boolean): Int{
     val enemyThree = listOf(R.drawable.e31, R.drawable.e32, R.drawable.e33)
     if (!boss) {
         when{
-            lvl in 0..1 -> return enemyOne.random()
-            lvl in 2..3 -> return enemtTwo.random()
-            lvl in 4..5 -> return enemyThree.random()
-            lvl > 5 -> endGame = true
+            GlobalData.lvl in 0..1 -> return enemyOne.random()
+            GlobalData.lvl in 2..3 -> return enemtTwo.random()
+            GlobalData.lvl in 4..5 -> return enemyThree.random()
+            GlobalData.lvl > 5 -> GlobalData.endGame = true
         }
     } else {
         when{
-            lvl in 0..1 -> return R.drawable.b11
-            lvl in 2..3 -> return R.drawable.boss
-            lvl in 4..5 -> return R.drawable.unnamed
-            lvl > 5 -> endGame = true
+            GlobalData.lvl in 0..1 -> return R.drawable.b11
+            GlobalData.lvl in 2..3 -> return R.drawable.boss
+            GlobalData.lvl in 4..5 -> return R.drawable.unnamed
+            GlobalData.lvl > 5 -> GlobalData.endGame = true
         }
     }
     return 0
 }
 
-
 public fun hpAndReward(){
     when{
-        lvl in 0..1 -> {
+        GlobalData.lvl in 0..1 -> {
             hpMob = 10
             hpBoss = 20
             rewardMob = 1
             rewardBoss = 10
         }
-        lvl in 2..3 -> {
+        GlobalData.lvl in 2..3 -> {
             hpMob = 15
             hpBoss = 30
             rewardMob = 2
             rewardBoss = 20
         }
-        lvl in 4..5 -> {
+        GlobalData.lvl in 4..5 -> {
             hpMob = 20
             hpBoss = 40
             rewardMob = 3
             rewardBoss = 30
         }
-        lvl > 5 -> endGame = true
+        GlobalData.lvl > 5 -> GlobalData.endGame = true
     }
 }
 
@@ -84,47 +81,46 @@ public fun onClick(
     money: TextView,
     stringHp: TextView
 ) {
-    if (boss == 5) {
-        fight(damage, hpBoss, rewardBoss, Hp, enemy, whoNext(true))
-        if (totalHp <= 0) {
-            wallet += rewardBoss
-            boss = 0
-            lvl++
+    if (GlobalData.boss == 5) {
+        fight(damage, hpBoss, Hp, enemy, whoNext(true))
+        if (GlobalData.totalHp <= 0) {
+            GlobalData.wallet += rewardBoss
+            GlobalData.boss = 0
+            GlobalData.lvl++
         }
     } else {
-        fight(damage, hpMob, rewardMob, Hp, enemy, whoNext(false))
-        if (totalHp <= 0) {
-            wallet += rewardMob
-            boss++
+        fight(damage, hpMob, Hp, enemy, whoNext(false))
+        if (GlobalData.totalHp <= 0) {
+            GlobalData.wallet += rewardMob
+            GlobalData.boss++
         }
     }
-    if (totalHp <= 0) money.text = "$wallet"
-    Hp.progress = totalHp
-    stringHp.text = "$totalHp"
+    if (GlobalData.totalHp <= 0) money.text = "${GlobalData.wallet}"
+    Hp.progress =  GlobalData.totalHp
+    stringHp.text = "${GlobalData.totalHp}"
 }
 
 private fun fight(
     damage: Int,
     hpMob: Int,
-    revardMob: Int,
     Hp: ProgressBar,
     enemy: ImageButton,
     textures: Int
 ) {
-    if (totalHp > 0) {
-        totalHp -= damage
+    if (GlobalData.totalHp > 0) {
+        GlobalData.totalHp -= damage
     } else {
-        maxHp = hpMob
-        totalHp = hpMob
+        GlobalData.maxHp = hpMob
+        GlobalData.totalHp = hpMob
         Hp.max = hpMob
-        lastTexture = textures
+        GlobalData.lastTexture = textures
         enemy.setImageResource(textures)
     }
 }
 
 
 private fun getPassiveDamage(): Int {
-    return passiveDamage
+    return GlobalData.passiveDamage
 }
 
 public fun equip(S1: Boolean, S2: Boolean, S3: Boolean, BS1: Button, BS2: Button, BS3: Button) {
@@ -135,3 +131,4 @@ public fun equip(S1: Boolean, S2: Boolean, S3: Boolean, BS1: Button, BS2: Button
     BS2.isEnabled = !S2
     BS3.isEnabled = !S3
 }
+

@@ -7,58 +7,63 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 
-public var boss: Int = 0
-public var totalHp: Int = 1
-public var damage: Int = 1
-public var passiveDamage: Int = 0
-public var wallet: Int = 0
-public var lvl: Int = 0
+class GlobalData {
+    companion object {
+        public var boss: Int = 0
+        public var totalHp: Int = 1
+        public var damage: Int = 1
+        public var passiveDamage: Int = 0
+        public var wallet: Int = 0
+        public var lvl: Int = 0
 
+        public var lastTexture = 0
+        public var maxHp = 1
+        public var endGame = false
+    }
+}
 
 public class MainActivity : AppCompatActivity() {
-    var preff: SharedPreferences? = null
+    public var pref1: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        preff = getSharedPreferences("TABLEMA", Context.MODE_PRIVATE)
-        if (endGame){
+        pref1 = getSharedPreferences("TABLEMA", Context.MODE_PRIVATE)
+        if (GlobalData.endGame) {
             delAll()
         }
-        boss = preff?.getInt("boss", 0)!!
-        totalHp = preff?.getInt("totalHp", 0)!!
-        damage = preff?.getInt("damage", 1)!!
-        passiveDamage = preff?.getInt("passiveDamage", 0)!!
-        wallet = preff?.getInt("wallet", 0)!!
-        lvl = preff?.getInt("lvl", 0)!!
-        lastTexture = preff?.getInt("lt", lastTexture)!!
-        maxHp = preff?.getInt("maxHp", maxHp)!!
+        GlobalData.boss = pref1?.getInt("boss", 0)!!
+        GlobalData.totalHp = pref1?.getInt("totalHp", 0)!!
+        GlobalData.damage = pref1?.getInt("damage", 1)!!
+        GlobalData.passiveDamage = pref1?.getInt("passiveDamage", 0)!!
+        GlobalData.wallet = pref1?.getInt("wallet", 0)!!
+        GlobalData.lvl = pref1?.getInt("lvl", 0)!!
+        GlobalData.lastTexture = pref1?.getInt("lt", GlobalData.lastTexture)!!
+        GlobalData.maxHp = pref1?.getInt("maxHp", GlobalData.maxHp)!!
 
         val weapon: Button = findViewById(R.id.weapon)
         val partners: Button = findViewById(R.id.partners)
-
         val money: TextView = findViewById(R.id.money)
         val enemy: ImageButton = findViewById(R.id.enemy)
         val Hp: ProgressBar = findViewById(R.id.progressBarHp)
         val stringHp: TextView = findViewById(R.id.stringHp)
 
-
         hpAndReward()
-        money.text = "$wallet"
-        Hp.max = maxHp
-        enemy.setImageResource(lastTexture)
+        money.text = "${GlobalData.wallet}"
+        Hp.max = GlobalData.maxHp
+        enemy.setImageResource(GlobalData.lastTexture)
         passiveDamage(enemy, Hp, money, stringHp)
 
         enemy.setOnClickListener {
-            if (lvl > 5) {
-                endGame = true
+            if (GlobalData.lvl > 5) {
+                GlobalData.endGame = true
                 this.finishAffinity()
             }
-            endGame = false
+            GlobalData.endGame = false
             hpAndReward()
-            stringHp.text = "$totalHp"
-            Hp.progress = totalHp
-            onClick(damage, enemy, Hp, money, stringHp)
+            stringHp.text = "${GlobalData.totalHp}"
+            Hp.progress = GlobalData.totalHp
+            onClick(GlobalData.damage, enemy, Hp, money, stringHp)
         }
 
         weapon.setOnClickListener {
@@ -73,15 +78,15 @@ public class MainActivity : AppCompatActivity() {
     }
 
     private fun saveData() {
-        val editor = preff?.edit()
-        editor?.putInt("boss", boss)
-        editor?.putInt("totalHp", totalHp)
-        editor?.putInt("damage", damage)
-        editor?.putInt("passiveDamage", passiveDamage)
-        editor?.putInt("wallet", wallet)
-        editor?.putInt("lvl", lvl)
-        editor?.putInt("lt", lastTexture)
-        editor?.putInt("maxHp", maxHp)
+        val editor = pref1?.edit()
+        editor?.putInt("boss", GlobalData.boss)
+        editor?.putInt("totalHp", GlobalData.totalHp)
+        editor?.putInt("damage", GlobalData.damage)
+        editor?.putInt("passiveDamage", GlobalData.passiveDamage)
+        editor?.putInt("wallet", GlobalData.wallet)
+        editor?.putInt("lvl", GlobalData.lvl)
+        editor?.putInt("lt", GlobalData.lastTexture)
+        editor?.putInt("maxHp", GlobalData.maxHp)
         editor?.apply()
     }
 
@@ -96,7 +101,7 @@ public class MainActivity : AppCompatActivity() {
     }
 
     fun delAll() {
-        val editor = preff?.edit()
+        val editor = pref1?.edit()
         editor?.clear()
         editor?.apply()
     }

@@ -6,9 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-
-
-
     <TextView
             android:id="@+id/money"
             android:layout_width="wrap_content"
@@ -16,7 +13,6 @@
             android:text="0"
             android:textSize="30dp"
             android:textColor="@color/black"
-
 
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="44dp"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="540dp"/>
@@ -40,7 +36,6 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="184dp" android:layout_marginBottom="456dp"/>
     <ProgressBar
-
             android:id="@+id/progressBarHp"
             style="?android:attr/progressBarStyleHorizontal"
             android:min="0"
@@ -62,7 +57,6 @@
             android:text="partners"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
 
             android:layout_marginStart="132dp" app:layout_constraintStart_toEndOf="@+id/weapon"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="60dp"/>

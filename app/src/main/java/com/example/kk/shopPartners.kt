@@ -13,17 +13,16 @@ private var p2 = false
 private var p3 = false
 
 class shopPartners : AppCompatActivity() {
-    var pref: SharedPreferences? = null
+    var pref3: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_partners)
-
-        pref = getSharedPreferences("TABLESP", Context.MODE_PRIVATE)
-        if (endGame) delAll()
-        p1 = pref?.getBoolean("p1", false)!!
-        p2 = pref?.getBoolean("p2", false)!!
-        p3 = pref?.getBoolean("p3", false)!!
+        pref3 = getSharedPreferences("TABLESP", Context.MODE_PRIVATE)
+        if (GlobalData.endGame) delAll()
+        p1 = pref3?.getBoolean("p1", false)!!
+        p2 = pref3?.getBoolean("p2", false)!!
+        p3 = pref3?.getBoolean("p3", false)!!
 
         val buttonP1: Button = findViewById(R.id.buttonP1)
         val buttonP2: Button = findViewById(R.id.buttonP2)
@@ -34,27 +33,27 @@ class shopPartners : AppCompatActivity() {
         if (p3) buttonP3.isEnabled = false
 
         buttonP1.setOnClickListener {
-            if (wallet >= 10) {
-                passiveDamage += 1
-                wallet -= 10
+            if (GlobalData.wallet >= 10) {
+                GlobalData.passiveDamage += 1
+                GlobalData.wallet -= 10
                 p1 = true
                 buttonP1.isEnabled = false
             }
         }
 
         buttonP2.setOnClickListener {
-            if (wallet >= 20) {
-                passiveDamage += 2
-                wallet -= 20
+            if (GlobalData.wallet >= 20) {
+                GlobalData.passiveDamage += 2
+                GlobalData.wallet -= 20
                 p2 = true
                 buttonP2.isEnabled = false
             }
         }
 
         buttonP3.setOnClickListener {
-            if (wallet >= 30) {
-                passiveDamage += 3
-                wallet -= 30
+            if (GlobalData.wallet >= 30) {
+                GlobalData.passiveDamage += 3
+                GlobalData.wallet -= 30
                 p3 = true
                 buttonP3.isEnabled = false
             }
@@ -62,7 +61,7 @@ class shopPartners : AppCompatActivity() {
     }
 
     private fun saveData(p1: Boolean, p2: Boolean, p3: Boolean){
-        val editor = pref?.edit()
+        val editor = pref3?.edit()
         editor?.putBoolean("p1", p1)
         editor?.putBoolean("p2", p2)
         editor?.putBoolean("p3", p3)
@@ -75,7 +74,7 @@ class shopPartners : AppCompatActivity() {
     }
 
     fun delAll(){
-        val editor = pref?.edit()
+        val editor = pref3?.edit()
         editor?.clear()
         editor?.apply()
     }

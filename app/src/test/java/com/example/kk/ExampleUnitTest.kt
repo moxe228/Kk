@@ -20,7 +20,6 @@ class ExampleUnitTest {
 }
 
 class Test {
-
     @Test
     fun test1() {
         lvl = 1
@@ -69,5 +68,4 @@ class Test {
         assertEquals(true, textur in expectedTexture)
         lvl = 0
     }
-
 }
